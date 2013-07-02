@@ -1,4 +1,5 @@
 .rvmrc
-tmp/*
+tmp/*/
+tmp/*.tar.gz
 vendor/openresty*
 /luac.out
