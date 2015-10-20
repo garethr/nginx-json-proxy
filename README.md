@@ -6,9 +6,9 @@ This project is for you.
 
 ## Usage
 
-You can test out the example by running nginx via foreman:
+You can test out the example by running openresty:
 
-    bundle exec foreman start
+    openresty -c `pwd`/config/nginx.conf
 
 Then making requests via curl:
 
@@ -21,26 +21,27 @@ Then making requests via curl:
     invalid request
 
 Rather than use a real backend the example currently just hard codes the
-response. If you change the text on line 11 of request.lua to return
-invalid JSON (say `ngx.say('["bob","jim]')` then you should get:
+response. If you change the response by commenting line 66 and uncommenting
+line 67 to return invalid JSON then you should get:
 
     # valid JSON, with invalid JSON response
     curl -X POST -d '["bob", "jim"]' http://localhost:3000/
     invalid response
 
-## Installing OpenResty in the ./vendor folder 
-    
-    bundle
-    bundle exec rake openresty:install
-    bundle exec foreman start nginx
+## Installing OpenResty
 
-### On Debian/Ubuntu
+    brew install openresty
+    brew install lua51
 
-    apt-get install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl
+### Installing cjson
 
-### On OSX
-    
-    brew install pcre
+    wget https://github.com/keplerproject/luarocks/archive/v2.2.2.tar.gz
+    tar xfv v2.2.2.tar.gz
+    cd luarocks-2.2.2
+    ./configure
+    make build
+    make install
+    luarocks install lua-cjson
 
 ## Thanks
 
